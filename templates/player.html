@@ -1,0 +1,103 @@
+<md-grid-list class="bgcolor" md-cols="20" md-row-height="2:1" md-cols-md="20" md-row-height-md="2:1" md-cols-sm="20" md-row-height-sm="1:3">
+	<md-grid-tile class="bgcolor" md-colspan="20" md-rowspan="2" md-colspan-md="20" md-rowspan-md="1" 
+	md-colspan-sm="20" md-rowspan-sm="1">
+	</md-grid-tile>
+	<md-grid-tile class="bgcolor" md-colspan="4" md-rowspan="15" md-colspan-md="1" md-rowspan-md="1" md-colspan-sm="1" 
+	md-rowspan-sm="1">
+	</md-grid-tile>
+	<!-- main -->
+	<md-grid-tile class="white-background" md-colspan="12" md-rowspan="14" md-colspan-md="18" md-rowspan-md="20" 
+	md-colspan-sm="18" md-rowspan-sm="12" layout="column" layout-align="start start">
+		<div class="full-dimension" layout="column" layout-align="start center">
+			<md-toolbar class="md-small md-warn md-whiteframe-z2"></md-toolbar>
+			<!-- NON-MOBILE_UI hide-sm -->
+			<!-- ////////////////////////////////////////////////////////////// -->
+			<div class="full-dimension fix-height-div md-whiteframe-z2" layout="row" 
+			layout-sm="column" layout-align-sm="start start" layout-align="space-around" hide-sm>
+				<!-- main interface -->
+				<md-whiteframe flex class="full-height white-background" layout="column" layout-align="start center" layout-padding flex-sm="100">
+					<!-- fotu -->
+					<div class="width-90 margin-top-10" flex="45" 
+					style="background-image: url({{present_image}});background-size:cover;"></div>
+					<sound-manager></sound-manager>
+					<!-- details -->
+					<div class="width-90 md-whiteframe-z2" flex="15" style="background:#ff5722;" layout-padding>
+						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
+						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
+					</div>
+					<!-- controls -->
+					<div class="width-90 padding-top-50" flex="30" layout="column" 
+					layout-align="space-around center" flex-sm>
+						<md-progress-linear md-mode="determinate" ng-value="progress" layout-padding></md-progress-linear>
+						<div layout="row" layout-align="center center">
+							<md-button class="md-fab md-primary md-mini" prev-track>
+								<md-icon md-svg-src="images/previous.svg"></md-icon>
+							</md-button>
+							<md-button class="md-fab md-warn" play-pause-toggle>
+								<md-icon md-svg-src="images/play.svg"></md-icon>
+							</md-button>
+							<md-button class="md-fab md-primary md-mini" next-track>
+								<md-icon md-svg-src="images/next.svg"></md-icon>
+							</md-button>
+						</div>
+					</div>
+				</md-whiteframe>
+				<!-- list -->
+				<md-whiteframe flex="35" flex-sm="100" class="left-shadow full-height white-background" 
+				style="overflow-y:auto;overflow-x:hidden;" layout-padding>
+					<div class="width-90 pointer" ng-repeat="data in song_list | searchString:searchText"
+					ng-click="changeSong(data)" style="overflow:none;" music-player="play" add-song="data">
+						<div class="md-title robotos weight-500">{{data.title}}</div>
+						<div class="md-subhead abel weight-400 padding-top-5">{{data.artist}}</div>
+						<md-divider></md-divider>
+					</div>
+				</md-whiteframe>
+			</div>
+			<!-- mobile UI -->
+			<!-- ///////////////////////////////////////////////////////////-->
+			<div class="full-dimension md-whiteframe-z2" layout-sm="column" 
+			layout-align-sm="start start" hide-gt-sm>
+				<md-whiteframe class="full-width white-background" layout-sm="column" layout-align-sm="start center" 
+				flex-sm="50" layout-padding>
+					<!-- fotu -->
+					<div class="padding-top-10 full-width" flex-sm
+					style="background-image: url({{present_image}});background-size:cover;"></div>
+					<!-- details -->
+					<div class="full-width md-whiteframe-z2" flex-sm="20">
+						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
+						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
+					</div>
+					<!-- controls -->
+					<div class="width-90 padding-top-50" flex-sm="30" layout="column" 
+					layout-align="space-around center" layout-margin>
+						<md-progress-linear md-mode="indeterminate"></md-progress-linear>
+						<div layout="row" layout-align="center center">
+							<md-button class="md-fab md-primary md-mini" prev-track>
+								<md-icon md-svg-src="images/previous.svg"></md-icon>
+							</md-button>
+							<md-button class="md-fab md-warn" play-pause-toggle>
+								<md-icon md-svg-src="images/play.svg"></md-icon>
+							</md-button>
+							<md-button class="md-fab md-primary md-mini" next-track>
+								<md-icon md-svg-src="images/next.svg"></md-icon>
+							</md-button>
+						</div>
+					</div>
+				</md-whiteframe>
+				<md-whiteframe flex-sm="45" class="full-width padding-top-10 white-background" 
+				style="overflow-y:auto;overflow-x:hidden;box-shadow:0px -2px 2px #eee;margin-top:20px;">
+					<div class="full-width" ng-repeat="data in song_list"
+					ng-click="changeSong(data)" style="overflow:none;" music-player="play">
+						<div class="md-headline robotos weight-500">{{data.title}}</div>
+						<div class="md-title robotos padding-top-5">{{data.artist}}</div>
+						<md-divider></md-divider>
+					</div>
+				</md-whiteframe>
+			</div>
+
+		</div>
+	</md-grid-tile>
+	<!-- //////////////////////////////////////////////////////// -->
+	<md-grid-tile md-colspan="4" md-rowspan="15" hide-sm>
+	</md-grid-tile>
+</md-grid-list>

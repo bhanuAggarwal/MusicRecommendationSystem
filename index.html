@@ -1,0 +1,33 @@
+<html>
+<head>
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+	<link rel="stylesheet" href="css/main.css"/>
+	<link rel="stylesheet" href="css/helper.css"/>
+</head>
+<body ng-app="app" ng-controller="controls">
+	<md-toolbar class="md-primary md-whiteframe-z2" layout="row" flex="100" 
+	layout-align="space-between center">
+		<md-whiteframe class="md-headline" layout-padding layout-margin>
+			<span id="player-button" ng-click="redirectPlayer()">MusicBugs</span>
+		</md-whiteframe>
+		<div layout="row" layout-align="end center" flex="25">
+			<md-input-container class="margin-0 padding-0 animate-search width-90" ng-show="showSearch">
+				<input type="text" class="abel" style="color:white;" ng-model="searchText"/>
+			</md-input-container>
+			<md-button class="md-fab md-mini md-primary" ng-click="searchToggle()">
+				<md-icon md-svg-src="images/search.svg"></md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<ng-view class="full-dimension"></ng-view>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+	<script src="bower_components/angular-material/angular-material.min.js"></script>
+	<script src="bower_components/angular-route/angular-route.min.js"></script> 
+	<script src="bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script> 
+	<script src="js/main.js"></script>
+	<script src="js/mapping.js"></script>
+	<script src="js/player_controller.js"></script>
+</body>
+</html>
