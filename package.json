@@ -1,0 +1,15 @@
+{
+  "name": "music_player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/bhanuAggarwal/MusicRecommendationSystem"
+  },
+  "author": "bhanu,tanya and utkarsh",
+  "license": "ISC"
+}
