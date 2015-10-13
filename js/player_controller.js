@@ -1,7 +1,11 @@
 app.controller('player_controller',function($scope,$http){
 	$scope.song_list=[];
+<<<<<<< HEAD
 	$http.get('song_list.json').then(function(res){
 		console.log(res);
+=======
+	$http.get('song-list.json').then(function(res){
+>>>>>>> 453add3f310eca31986aaa31ea6836984877d8ea
 		$scope.song_list=res.data;
 		$scope.playlist=res.data;
 		angular.forEach($scope.playlist,function(track){
