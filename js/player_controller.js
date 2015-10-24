@@ -13,7 +13,6 @@ app.controller('player_controller',function($scope,$http){
 		console.log("fail");
 	});
 	$scope.$on('changedIndex',function(obj,data){
-		console.log(data);
 		if(data.type==1)
 		{
 			$scope.current_track_name = $scope.song_list[data.mindex].title;
