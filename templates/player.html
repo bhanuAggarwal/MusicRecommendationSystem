@@ -28,17 +28,14 @@
 					<!-- controls -->
 					<div class="width-90 padding-top-50" flex="30" layout="column" 
 					layout-align="space-around center" flex-sm>
-						<div class="full-width pointer">
-							<md-progress-linear md-mode="determinate" seek-track ng-value="progress" layout-padding>
-							</md-progress-linear>
-						</div>
+						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
 						<div layout="row" layout-align="center center">
 							<md-button class="md-fab md-primary md-mini" prev-track>
 								<md-icon md-svg-src="images/previous.svg"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-warn" play-pause-toggle>
 								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
-								<md-icon md-svg-src="images/pause.svg"  ng-show="isPlaying"></md-icon>
+								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-primary md-mini" next-track>
 								<md-icon md-svg-src="images/next.svg"></md-icon>
@@ -72,19 +69,16 @@
 						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
 					</div>
 					<!-- controls -->
-					<div class="width-90 padding-top-50" flex-sm="30" layout="column" 
-					layout-align="space-around center" layout-margin>
-						<div class="full-width pointer">
-							<md-progress-linear md-mode="determinate"  seek-track ng-value="progress" layout-padding>
-							</md-progress-linear>
-						</div>
-						<div layout="row" layout-align="center center">
+					<div class="width-90 padding-top-50" flex-sm="30" layout-sm="column" 
+					layout-align-sm="space-around center" layout-margin>
+						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
+						<div layout-sm="row" layout-align-sm="start center">
 							<md-button class="md-fab md-primary md-mini" prev-track>
 								<md-icon md-svg-src="images/previous.svg"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-warn" play-pause-toggle>
 								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
-								<md-icon md-svg-src="images/pause.svg"  ng-show="isPlaying"></md-icon>
+								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-primary md-mini" next-track>
 								<md-icon md-svg-src="images/next.svg"></md-icon>

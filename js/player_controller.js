@@ -1,6 +1,7 @@
 app.controller('player_controller',function($scope,$http){
 	$scope.song_list=[];
-	$http.get('song-list.json').then(function(res){
+	$http.get('song_list.json').then(function(res){
+		console.log(res);
 		$scope.song_list=res.data;
 		$scope.playlist=res.data;
 		angular.forEach($scope.playlist,function(track){
@@ -16,14 +17,14 @@ app.controller('player_controller',function($scope,$http){
 		if(data.type==1)
 		{
 			$scope.current_track_name = $scope.song_list[data.mindex].title;
-			$scope.current_track_artist = $scope.song_list[data.mindex].title;
+			$scope.current_track_artist = $scope.song_list[data.mindex].artist;
 		}
 		else{
 			angular.forEach($scope.song_list, function(elem, key){
 				if(data.mindex==elem.id)
 				{
 					$scope.current_track_name = $scope.song_list[key].title;
-					$scope.current_track_artist = $scope.song_list[key].title;
+					$scope.current_track_artist = $scope.song_list[key].artist;
 				}
 			});
 		}
