@@ -1,0 +1,33 @@
+<div class="ng-full-height" layout="column" layout-align="space-around center">
+		<div class="full-width" layout="row" layout-align="center center">
+			<md-whiteframe class="md-whiteframe-z1 white-background padding-20" flex="40" flex-md="70" flex-sm="90" layout="column" layout-align="start center">
+				<md-input-container class="full-width">
+					<label>Song name</label>
+					<input type="text" ng-model="name"/>
+				</md-input-container>
+				<md-input-container class="full-width">
+					<label>Category</label>
+					<input type="text" ng-model="category"/>
+				</md-input-container>
+				<md-input-container class="full-width">
+					<label>Artist</label>
+					<input type="text" ng-model="artist"/>
+				</md-input-container>
+				<md-input-container class="full-width">
+					<label>Rating</label>
+					<input type="text" ng-model="rating"/>
+				</md-input-container>
+				<md-input-container class="full-width">
+					<label>Tags(tag1,tag2,tag3)</label>
+					<input type="text" ng-model="tags"/>
+				</md-input-container>
+				<md-input-container class="full-width">
+					<label>File Location</label>
+					<input type="text" ng-model="location"/>
+				</md-input-container>
+				<md-button class="md-raised md-warn width-90" ng-disabled="enable()" ng-click="submit()">
+					SUBMIT
+				</md-button>
+			</md-whiteframe>
+		</div>
+</div>

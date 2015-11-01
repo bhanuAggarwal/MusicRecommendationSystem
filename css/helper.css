@@ -6,6 +6,9 @@
 .test{
 	background: rgba(0,0,0,0.2);
 }
+.ng-full-height{
+	height: calc(100% - 64px) !important;
+}
 .full-height{
 	position: relative;
 	height: 100%;
@@ -29,6 +32,9 @@
 }
 .weight-300{
 	font-weight: 300;
+}
+.padding-20{
+	padding:20px !important;
 }
 .padding-top-5{
 	position: relative;
@@ -57,6 +63,9 @@
 }
 .left-shadow{
 	box-shadow: -0.5px 0px 5px #bdbdbd;
+}
+.spacing-1{
+	letter-spacing: 1px;
 }
 .pointer{
 	cursor: pointer;
