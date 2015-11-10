@@ -6,5 +6,9 @@ app.config(['$routeProvider',function($routeProvider){
 	.when('/upload',{
 		templateUrl: 'templates/upload.html',
 		controller:'upload_controller'
+	})
+	.when('/login',{
+		templateUrl: 'templates/login.html',
+		controller:'login_controller'
 	});
 }]);

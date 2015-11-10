@@ -24,6 +24,9 @@
 .white-background{
 	background: #fff;
 }
+.grey-background{
+	background: #424242;
+}
 .weight-500{
 	font-weight: 600;
 }
