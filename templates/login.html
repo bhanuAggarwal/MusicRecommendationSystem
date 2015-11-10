@@ -1,0 +1,25 @@
+<div class="full-dimension padding-top-50" layout="row" layout-align="center start" 
+style="background: #e0e0e0">
+	<div class="md-whiteframe-z3 white-background" layout="column" layout-align="space-around center" 
+	flex="33" flex-sm="100" flex-md="60">
+	<md-toolbar class="md-primary md-tall" layout="row" layout-align="center center">
+			<md-icon md-svg-src="images/icon.svg" style="transform:scale(4.2);"></md-icon>
+	</md-toolbar>
+		<div class="full-dimension padding-20" layout="column" layout-align="space-around center" layout-padding>
+			<md-input-container style="width:80%;">
+				<label class="robotos">Username</label>
+				<input type="text" ng-model="username" value=""/>
+			</md-input-container>
+			<md-input-container style="width:80%;">
+				<label class="robotos">Password</label>
+				<input type="password" ng-model="pass" value=""/>
+			</md-input-container>
+			<md-button class="md-raised md-warn" style="width:80%" ng-disabled="(enable() && inProcess)" 
+			ng-click="process()">
+				<span ng-show="!inProcess">Log in</span>
+				<span ng-show="inProcess">Logging in..</span>
+			</md-button>
+			<md-progress-linear class="padding-top-10" md-mode="indeterminate" ng-show="inProcess" style="width:80%"></md-progress-linear>
+		</div>
+	</div>
+</div>
