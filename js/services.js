@@ -18,4 +18,14 @@ app.service('mainservice',function($http,$q){
 		});
 		return pr.promise;*/
 	};
+	this.postRating = function(data){
+		/*var pr=$q.defer();
+		pr.promise=null;
+		$http.post(route+'/login',data,{'Content-Type':'application/json'}).then(function(res){
+			pr.resolve(res);
+		},function(res){
+			pr.resolve(res);
+		});
+		return pr.promise;*/
+	};
 });

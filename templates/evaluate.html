@@ -15,6 +15,9 @@
 			<div class="full-dimension fix-height-div md-whiteframe-z2" layout="row" 
 			layout-sm="column" layout-align-sm="start start" layout-align="space-around" hide-sm>
 				<!-- main interface -->
+				<!-- caching -->
+				<i class="fa fa-star" style="display: none;"></i>
+				<!-- ////////// -->
 				<md-whiteframe flex class="full-height white-background" layout="column" layout-align="start center" layout-padding flex-sm="100">
 					<!-- fotu -->
 					<div class="width-90 margin-top-10" flex="45" 
@@ -29,28 +32,46 @@
 					<div class="width-90 padding-top-20" flex="30" layout="column" 
 					layout-align="space-around center" flex-sm>
 						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
-						<div layout="row" layout-align="center center">
-							<md-button class="md-fab md-primary md-mini" prev-track>
-								<md-icon md-svg-src="images/previous.svg"></md-icon>
+						<div layout="row" layout-align="center center" ng-show="track_played">
+							<md-button class="md-fab md-primary md-mini" mute-music>
+								<md-icon class="scale-8" md-svg-src="images/mute.svg"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-warn" play-pause-toggle>
 								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
 								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
 							</md-button>
-							<md-button class="md-fab md-primary md-mini" next-track>
-								<md-icon md-svg-src="images/next.svg"></md-icon>
+							<md-button class="md-fab md-primary md-mini" repeat-music>
+								<md-icon class="scale-8" md-svg-src="images/repeat.svg"></md-icon>
+							</md-button>
+						</div>
+						<div class="full-width" layout="row" layout-align="center center" ng-show="!track_played" ng-click="track_played=true">
+							<md-button class="md-primary md-raised" play-pause-toggle flex="50" 
+							flex-sm="100">
+								<span class="abel weight-400 text-padding" style="font-size: 1.1em;">Lets Begin!!</span>
 							</md-button>
 						</div>
 					</div>
 				</md-whiteframe>
 				<!-- list -->
-				<md-whiteframe flex="35" flex-sm="100" class="left-shadow full-height white-background" 
-				style="overflow-y:auto;overflow-x:hidden;" layout-padding>
-					<div class="width-90 pointer" ng-repeat="data in song_list | searchString:searchText"
-					ng-click="changeSong(data)" style="overflow:none;" music-player="play" add-song="data">
-						<div class="md-title robotos weight-500">{{data.title}}</div>
-						<div class="md-subhead abel weight-400 padding-top-5">{{data.artist}}</div>
-						<md-divider></md-divider>
+				<md-whiteframe flex="35" flex-sm="100" class="left-shadow full-height" 
+				style="overflow-y:auto;overflow-x:hidden;">
+					<div class="full-dimension grey-bg md-whiteframe-z3" layout="column" 
+					layout-align="start start" layout-padding >
+						<div class="full-width" layout="column" layout-align="start start" flex="70" ng-show="track_played">
+							<span class="color-white robotos weight-500 text-padding" 
+							style="font-size:1.3em;">{{current_track_name}}</span>
+							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">{{current_track_artist}}</span>
+							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">Genre</span>
+						</div>
+						<div class="full-width" flex layout="column" layout-align="space-between start">
+							<div class="star-rating full-width" star-rating rating-value="1"
+							data-max="5" on-rating-selected="selected(rating)" active="rating_active" 
+							ng-show="track_played"></div>
+							<md-button class="md-raised md-warn full-width padding-0 margin-0 
+							anime-show" ng-show="next" ng-click="rated()" next-track>
+								Next Song
+							</md-button>
+						</div>
 					</div>
 				</md-whiteframe>
 			</div>
@@ -59,7 +80,7 @@
 			<div class="full-dimension md-whiteframe-z2" layout-sm="column" 
 			layout-align-sm="start start" hide-gt-sm>
 				<md-whiteframe class="full-width white-background" layout-sm="column" layout-align-sm="start center" 
-				flex-sm="80" layout-padding>
+				flex-sm="70" layout-padding>
 					<!-- fotu -->
 					<div class="full-dimension padding-top-10 full-width" flex-sm
 					style="background-image: url({{present_image}});background-size:cover;" flex-sm></div>
@@ -72,27 +93,44 @@
 					<div class="width-90 padding-top-20" flex-sm="30" layout-sm="column" 
 					layout-align-sm="space-around center" layout-margin>
 						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
-						<div layout-sm="row" layout-align-sm="start center">
-							<md-button class="md-fab md-primary md-mini" prev-track>
-								<md-icon md-svg-src="images/previous.svg"></md-icon>
+						<div layout="row" layout-align="center center" ng-show="track_played">
+							<md-button class="md-fab md-primary md-mini" mute-music>
+								<md-icon class="scale-8" md-svg-src="images/mute.svg"></md-icon>
 							</md-button>
 							<md-button class="md-fab md-warn" play-pause-toggle>
 								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
 								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
 							</md-button>
-							<md-button class="md-fab md-primary md-mini" next-track>
-								<md-icon md-svg-src="images/next.svg"></md-icon>
+							<md-button class="md-fab md-primary md-mini" repeat-music>
+								<md-icon class="scale-8" md-svg-src="images/repeat.svg"></md-icon>
+							</md-button>
+						</div>
+						<div class="full-width" layout="row" layout-align="center center" ng-show="!track_played" ng-click="track_played=true">
+							<md-button class="md-primary md-raised" play-pause-toggle flex="50" 
+							flex-sm="100">
+								<span class="abel weight-400 text-padding" style="font-size: 1.1em;">Lets Begin!!</span>
 							</md-button>
 						</div>
 					</div>
 				</md-whiteframe>
 				<md-whiteframe flex-sm="45" class="full-width padding-top-10 white-background" 
-				style="overflow-y:auto;overflow-x:hidden;box-shadow:0px -2px 2px #eee;margin-top:20px;">
-					<div class="full-width" ng-repeat="data in song_list"
-					ng-click="changeSong(data)" style="overflow:none;" music-player="play">
-						<div class="md-headline robotos weight-500">{{data.title}}</div>
-						<div class="md-title robotos padding-top-5">{{data.artist}}</div>
-						<md-divider></md-divider>
+				style="overflow-y:auto;overflow:hidden;box-shadow:0px -2px 2px #eee;margin-top:20px;">
+					<div class="full-dimension grey-bg md-whiteframe-z3" layout="column" layout-align="start start" layout-padding>
+						<div class="full-width" layout="column" layout-align="start start" flex="70" flex-sm="20" ng-show="track_played">
+							<span class="color-white robotos weight-500 text-padding" 
+							style="font-size:1.3em;">{{current_track_name}}</span>
+							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">{{current_track_artist}}</span>
+							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">Genre</span>
+						</div>
+						<div class="full-width" layout="column" layout-align="space-between start" flex flex-sm="20">
+							<div class="star-rating full-width" star-rating rating-value="1"
+							data-max="5" on-rating-selected="selected(rating)" active="rating_active" 
+							ng-show="track_played"></div>
+							<md-button class="md-raised md-warn full-width padding-0 margin-0 
+							anime-show" ng-show="next" ng-click="rated()" next-track>
+								Next Song
+							</md-button>
+						</div>
 					</div>
 				</md-whiteframe>
 			</div>

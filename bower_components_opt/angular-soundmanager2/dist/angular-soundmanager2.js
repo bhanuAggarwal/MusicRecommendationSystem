@@ -4810,6 +4810,9 @@ ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer',
             link: function(scope, element, attrs) {
                 //init and load sound manager 2
                 angularPlayer.init();
+                scope.$on('redirecting',function(){
+                     angularPlayer.stop();
+                });
                 scope.$on('track:progress', function(event, data) {
                     scope.$apply(function() {
                         scope.progress = data;

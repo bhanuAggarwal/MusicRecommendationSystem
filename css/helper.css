@@ -24,7 +24,10 @@
 .white-background{
 	background: #fff;
 }
-.grey-background{
+.scale-8{
+	transform:scale(0.8);
+}
+.grey-bg{
 	background: #424242;
 }
 .weight-500{
@@ -47,9 +50,9 @@
 	position: relative;
 	padding-top: 10px !important;
 }
-.padding-top-50{
+.padding-top-20{
 	position: relative;
-	padding-top: 50px !important;
+	padding-top: 20px !important;
 }
 .padding-bottom-0{
 	padding-bottom: 0 !important;
@@ -65,7 +68,7 @@
 	margin-top: 10px !important;
 }
 .left-shadow{
-	box-shadow: -0.5px 0px 5px #bdbdbd;
+	box-shadow: -1px 0px 5px #bdbdbd;
 }
 .spacing-1{
 	letter-spacing: 1px;

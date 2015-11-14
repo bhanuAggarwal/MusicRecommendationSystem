@@ -7,6 +7,10 @@ app.config(['$routeProvider',function($routeProvider){
 		templateUrl: 'templates/upload.html',
 		controller:'upload_controller'
 	})
+	.when('/evaluate',{
+		templateUrl: 'templates/evaluate.html',
+		controller:'evaluate_controller'
+	})
 	.when('/login',{
 		templateUrl: 'templates/login.html',
 		controller:'login_controller'

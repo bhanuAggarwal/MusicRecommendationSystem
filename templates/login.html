@@ -14,10 +14,10 @@ style="background: #e0e0e0">
 				<label class="robotos">Password</label>
 				<input type="password" ng-model="pass" value=""/>
 			</md-input-container>
-			<md-button class="md-raised md-warn" style="width:80%" ng-disabled="(enable() && inProcess)" 
+			<md-button class="md-raised md-warn" style="width:80%" ng-disabled="enable()" 
 			ng-click="process()">
 				<span ng-show="!inProcess">Log in</span>
-				<span ng-show="inProcess">Logging in..</span>
+				<span ng-show="inProcess" style="color:#424242">Logging in..</span>
 			</md-button>
 			<md-progress-linear class="padding-top-10" md-mode="indeterminate" ng-show="inProcess" style="width:80%"></md-progress-linear>
 		</div>
