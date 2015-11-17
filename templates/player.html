@@ -1,105 +1,77 @@
-<md-grid-list class="bgcolor" md-cols="20" md-row-height="2:1" md-cols-md="20" md-row-height-md="2:1" md-cols-sm="20" md-row-height-sm="1:3">
-	<md-grid-tile class="bgcolor" md-colspan="20" md-rowspan="2" md-colspan-md="20" md-rowspan-md="1" 
-	md-colspan-sm="20" md-rowspan-sm="1">
-	</md-grid-tile>
-	<md-grid-tile class="bgcolor" md-colspan="4" md-rowspan="15" md-colspan-md="1" md-rowspan-md="1" md-colspan-sm="1" 
-	md-rowspan-sm="1">
-	</md-grid-tile>
-	<!-- main -->
-	<md-grid-tile class="white-background" md-colspan="12" md-rowspan="14" md-colspan-md="18" md-rowspan-md="20" 
-	md-colspan-sm="18" md-rowspan-sm="12" layout="column" layout-align="start start">
-		<div class="full-dimension" layout="column" layout-align="start center">
-			<md-toolbar class="md-small md-warn md-whiteframe-z2"></md-toolbar>
-			<!-- NON-MOBILE_UI hide-sm -->
-			<!-- ////////////////////////////////////////////////////////////// -->
-			<div class="full-dimension fix-height-div md-whiteframe-z2" layout="row" 
-			layout-sm="column" layout-align-sm="start start" layout-align="space-around" hide-sm>
-				<!-- main interface -->
-				<md-whiteframe flex class="full-height white-background" layout="column" layout-align="start center" layout-padding flex-sm="100">
-					<!-- fotu -->
-					<div class="width-90 margin-top-10" flex="45" 
-					style="background-image: url({{present_image}});background-size:cover;"></div>
-					<sound-manager></sound-manager>
-					<!-- details -->
-					<div class="width-90 md-whiteframe-z2" flex="15" style="background:#ff5722;" layout-padding>
-						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
-						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
-					</div>
-					<!-- controls -->
-					<div class="width-90 padding-top-20" flex="30" layout="column" 
-					layout-align="space-around center" flex-sm>
-						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
-						<div layout="row" layout-align="center center">
-							<md-button class="md-fab md-primary md-mini" prev-track>
-								<md-icon md-svg-src="images/previous.svg"></md-icon>
-							</md-button>
-							<md-button class="md-fab md-warn" play-pause-toggle>
-								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
-								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
-							</md-button>
-							<md-button class="md-fab md-primary md-mini" next-track>
-								<md-icon md-svg-src="images/next.svg"></md-icon>
-							</md-button>
+<div class="full-width ng-full-height hide-overflow">
+	<div class="full-dimension" layout="column" layout-align="start start">
+		<div class="full-dimension" flex="90" layout="column" layout-align="space-around start">
+			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
+			layout-align="start center"layout-padding>
+				<div class="full-width">
+					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Trending</span>
+					<md-divider class="full-width" layout-padding></md-divider>
+				</div>
+				<div class="full-width" layout="row" layout-align="start center">
+					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_trending" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+						<div class="full-dimension" 
+						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
+						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
+							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
 						</div>
 					</div>
-				</md-whiteframe>
-				<!-- list -->
-				<md-whiteframe flex="35" flex-sm="100" class="left-shadow full-height white-background" 
-				style="overflow-y:auto;overflow-x:hidden;" layout-padding>
-					<div class="width-90 pointer" ng-repeat="data in song_list | searchString:searchText"
-					ng-click="changeSong(data)" style="overflow:none;" music-player="play" add-song="data">
-						<div class="md-title robotos weight-500">{{data.title}}</div>
-						<div class="md-subhead abel weight-400 padding-top-5">{{data.artist}}</div>
-						<md-divider></md-divider>
-					</div>
-				</md-whiteframe>
+				</div>
 			</div>
-			<!-- mobile UI -->
-			<!-- ///////////////////////////////////////////////////////////-->
-			<div class="full-dimension md-whiteframe-z2" layout-sm="column" 
-			layout-align-sm="start start" hide-gt-sm>
-				<md-whiteframe class="full-width white-background" layout-sm="column" layout-align-sm="start center" 
-				flex-sm="80" layout-padding>
-					<!-- fotu -->
-					<div class="full-dimension padding-top-10 full-width" flex-sm
-					style="background-image: url({{present_image}});background-size:cover;" flex-sm></div>
-					<!-- details -->
-					<div class="full-width md-whiteframe-z2" style="background:#ff5722;" layout="column" layout-align="space-around start" flex-sm="10" layout-padding>
-						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
-						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
-					</div>
-					<!-- controls -->
-					<div class="width-90 padding-top-20" flex-sm="30" layout-sm="column" 
-					layout-align-sm="space-around center" layout-margin>
-						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
-						<div layout-sm="row" layout-align-sm="start center">
-							<md-button class="md-fab md-primary md-mini" prev-track>
-								<md-icon md-svg-src="images/previous.svg"></md-icon>
-							</md-button>
-							<md-button class="md-fab md-warn" play-pause-toggle>
-								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
-								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
-							</md-button>
-							<md-button class="md-fab md-primary md-mini" next-track>
-								<md-icon md-svg-src="images/next.svg"></md-icon>
-							</md-button>
+			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
+			layout-align="start start" layout-padding>
+				<div class="full-width">
+					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Recommended</span>
+					<md-divider class="full-width" layout-padding></md-divider>
+				</div>
+				<div class="full-width" layout="row" layout-align="start center">
+					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_recommended" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+						<div class="full-dimension" 
+						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
+						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
+							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
 						</div>
 					</div>
-				</md-whiteframe>
-				<md-whiteframe flex-sm="45" class="full-width padding-top-10 white-background" 
-				style="overflow-y:auto;overflow-x:hidden;box-shadow:0px -2px 2px #eee;margin-top:20px;">
-					<div class="full-width" ng-repeat="data in song_list"
-					ng-click="changeSong(data)" style="overflow:none;" music-player="play">
-						<div class="md-headline robotos weight-500">{{data.title}}</div>
-						<div class="md-title robotos padding-top-5">{{data.artist}}</div>
-						<md-divider></md-divider>
-					</div>
-				</md-whiteframe>
+				</div>
 			</div>
-
+			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
+			layout-align="start start"layout-padding>
+				<div class="full-width">
+					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Current Playlist</span>
+					<md-divider class="full-width" layout-padding></md-divider>
+				</div>
+				<div class="full-width" layout="row" layout-align="start center">
+					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_current" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+						<div class="full-dimension" 
+						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
+						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
+							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</md-grid-tile>
-	<!-- //////////////////////////////////////////////////////// -->
-	<md-grid-tile md-colspan="4" md-rowspan="15" hide-sm>
-	</md-grid-tile>
-</md-grid-list>
+		<div class="full-dimension md-whiteframe-z3 grey-bg" flex="10" layout="row" 
+		layout-align="start center" layout-padding>
+			<sound-manager></sound-manager>
+			<div class="full-height" flex="15" layout="row" layout-align="center center">
+				<md-button class="md-icon-button" play-pause-toggle>
+					<md-icon class="scale-20" md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
+					<md-icon class="scale-20" md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
+				</md-button>
+				<md-button class="md-icon-button" next-track>
+					<md-icon class="scale-13" md-svg-src="images/next.svg"></md-icon>
+				</md-button>
+			</div>
+			<div class="full-height border-left-right" flex="40" layout="row" layout-align="start center" layout-padding>
+				<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding 
+				style="cursor:pointer;height:10px !important;"></md-progress-linear>
+			</div>
+			<div layout="column" layout-align="start start" layout-padding>
+				<span class="color-white robotos weight-600 text-padding" 
+				style="font-size:1.1em;">{{current_track_name}}</span>
+				<span class="color-white Abel weight-300 text-padding" style="font-size: 1em">{{current_track_artist}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+	

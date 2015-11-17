@@ -15,6 +15,7 @@
 			<div class="full-dimension fix-height-div md-whiteframe-z2" layout="row" 
 			layout-sm="column" layout-align-sm="start start" layout-align="space-around" hide-sm>
 				<!-- main interface -->
+				<sound-manager></sound-manager>
 				<!-- caching -->
 				<i class="fa fa-star" style="display: none;"></i>
 				<!-- ////////// -->
@@ -22,7 +23,7 @@
 					<!-- fotu -->
 					<div class="width-90 margin-top-10" flex="45" 
 					style="background-image: url({{present_image}});background-size:cover;"></div>
-					<sound-manager></sound-manager>
+					
 					<!-- details -->
 					<div class="width-90 md-whiteframe-z2" flex="15" style="background:#ff5722;" layout-padding>
 						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
@@ -65,8 +66,8 @@
 						</div>
 						<div class="full-width" flex layout="column" layout-align="space-between start">
 							<div class="star-rating full-width" star-rating rating-value="1"
-							data-max="5" on-rating-selected="selected(rating)" active="rating_active" 
-							ng-show="track_played"></div>
+							data-max="5" on-rating-selected="selected(rating)" ng-show="track_played">
+							</div>
 							<md-button class="md-raised md-warn full-width padding-0 margin-0 
 							anime-show" ng-show="next" ng-click="rated()" next-track>
 								Next Song
@@ -126,6 +127,7 @@
 							<div class="star-rating full-width" star-rating rating-value="1"
 							data-max="5" on-rating-selected="selected(rating)" active="rating_active" 
 							ng-show="track_played"></div>
+
 							<md-button class="md-raised md-warn full-width padding-0 margin-0 
 							anime-show" ng-show="next" ng-click="rated()" next-track>
 								Next Song

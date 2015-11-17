@@ -9,11 +9,11 @@ template :  '<div class="rating full-width padding-0 margin-0" layout="row" layo
 scope : {
  ratingValue : '=',
  max : '=',
- onRatingSelected : '&',
- active: '='
+ onRatingSelected : '&'
 },
 link : function(scope, elem, attrs) {
  var updateStars = function() {
+  console.log(scope.active);
   scope.stars = [];
   for ( var i = 0; i < scope.max; i++) {
    scope.stars.push({
@@ -21,7 +21,9 @@ link : function(scope, elem, attrs) {
    });
   }
  };
- 
+ scope.$on('rated',function(){
+  scope.active=false;
+ });
  scope.toggle = function(index) {
   scope.active=true;
   scope.ratingValue = index + 1;

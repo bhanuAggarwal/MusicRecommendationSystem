@@ -14,7 +14,7 @@ app.controller('login_controller',function($scope,mainservice){
 		$scope.inProcess=true;
 		var data = {
 			"username": $scope.username,
-			"password": $scope.password
+			"password": $scope.pass
 		};
 		 var response = mainservice.login(data);
 		// response.promise.then(function(res){

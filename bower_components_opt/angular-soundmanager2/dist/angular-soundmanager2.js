@@ -3,7 +3,6 @@
  * SoundManager 2: JavaScript Sound for the Web
  * ----------------------------------------------
  * http://schillmania.com/projects/soundmanager2/
- *
  * Copyright (c) 2007, Scott Schiller. All rights reserved.
  * Code provided under the BSD License:
  * http://schillmania.com/projects/soundmanager2/license.txt
@@ -2361,12 +2360,12 @@
                 if(!s.isHTML5 && !instanceOptions.isMovieStar) {
                     if(instanceOptions.duration) {
                         // use duration from options, if specified and larger. nobody should be specifying duration in options, actually, and it should be retired.
-                        s.durationEstimate = (s.duration > instanceOptions.duration) ? s.duration : instanceOptions.duration;
+                        s.durationEstimate = (s.duration > instanceOptions.duration) ? s.duration+40 : instanceOptions.duration+40;
                     } else {
-                        s.durationEstimate = parseInt((s.bytesTotal / s.bytesLoaded) * s.duration, 10);
+                        s.durationEstimate = parseInt((s.bytesTotal / s.bytesLoaded) * s.duration, 10)+400;
                     }
                 } else {
-                    s.durationEstimate = s.duration;
+                    s.durationEstimate = s.duration+40;
                 }
                 // for flash, reflect sequential-load-style buffering
                 if(!s.isHTML5) {
@@ -4481,7 +4480,7 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
                             currentTrack = this.id;
                             //$rootScope.$broadcast('track:id', this.id);
                             //broadcast current playing track progress
-                            trackProgress = ((this.position / this.duration) * 100);
+                            trackProgress = ((this.position / (this.duration)) * 100);
                             $rootScope.$broadcast('track:progress', trackProgress);
                             //broadcast track position
                             $rootScope.$broadcast('currentTrack:position', this.position);
@@ -4636,6 +4635,7 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
                 $rootScope.$broadcast('track:id', trackId);
                 //set as playing
                 isPlaying = true;
+                
                 $rootScope.$broadcast('music:isPlaying', isPlaying);
             },
             play: function() {
@@ -4691,8 +4691,7 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
                         this.playTrack(soundManager.soundIDs[0]);
                     } else {
                         //breadcase not playing anything
-                        isPlaying = false;
-                        $rootScope.$broadcast('music:isPlaying', isPlaying);
+                        
                     }
                 }
             },
@@ -4803,18 +4802,26 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
 ]);
 
 
-ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer',
-    function($filter, angularPlayer) {
+ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer', '$rootScope', 
+    function($filter, angularPlayer,$rootScope) {
         return {
             restrict: "E",
             link: function(scope, element, attrs) {
                 //init and load sound manager 2
                 angularPlayer.init();
                 scope.$on('redirecting',function(){
-                     angularPlayer.stop();
+                    angularPlayer.pause();
+                    angularPlayer.setCurrentTrack(null);
                 });
+                scope.$on('playSong',function(event,data){
+                    angularPlayer.playTrack(data.id);
+                    scope.isPlaying=true;
+                    // angularPlayer.clearPlaylist();
+                    // $rootScope.$broadcast('music:isPlaying', true);
+                });
+
                 scope.$on('track:progress', function(event, data) {
-                    scope.$apply(function() {
+                    scope.$apply(function(){
                         scope.progress = data;
                     });
                 });
@@ -5163,7 +5170,6 @@ ngSoundManager.directive('playPauseToggle', ['angularPlayer',
                 //         }
                 //     }
                 // });
-                
                 element.bind('click', function(event) {
                     if(angularPlayer.isPlayingStatus()) {
                         //if playing then pause

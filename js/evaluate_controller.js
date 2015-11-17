@@ -2,17 +2,10 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	/*music controller*/
 	$scope.song_list=[];
 	$scope.redirect_to_player=false;
-	$http.get('song_list.json').then(function(res){
+	var promise=mainservice.preparePlayer();
+	promise.then(function(res){
 		$scope.song_list=res.data;
-		$scope.playlist=res.data;
-		angular.forEach($scope.playlist,function(track){
-			 soundManager.createSound({
-                id: track.id,
-                url: track.url
-            });
-		});
-	},function(){
-		console.log("fail");
+		console.log(res.data);
 	});
 	$scope.$on('changedIndex',function(obj,data){
 		if(data.mindex==$scope.song_list.length)
@@ -21,6 +14,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 		}
 		if(data.type==1)
 		{
+			$scope.present_image=$scope.song_list[data.mindex].image;
 			$scope.current_track_name = $scope.song_list[data.mindex].title;
 			$scope.current_track_artist = $scope.song_list[data.mindex].artist;
 		}
@@ -28,6 +22,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 			angular.forEach($scope.song_list, function(elem, key){
 				if(data.mindex==elem.id)
 				{
+					$scope.present_image=$scope.song_list[key].image;
 					$scope.current_track_name = $scope.song_list[key].title;
 					$scope.current_track_artist = $scope.song_list[key].artist;
 				}
@@ -42,13 +37,11 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 		}
 
 	});
-	soundManager.play(1);
 	var path="images/";
 	$scope.next=false;
 	$scope.track_played=false;
 	var rating=0;
 	$scope.rating_active=false;
-	$scope.present_image=path+"music.PNG";
 	$scope.selected = function(t_rating){
 		$scope.next=true;
 		rating=t_rating;
@@ -59,7 +52,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	}
 	$scope.rated =  function(){
 		$scope.next=false;
-		$scope.rating_active=false;
+		$rootScope.$broadcast('rated');
 		var promise = mainservice.postRating(rating);
 	};
 });
