@@ -1,19 +1,19 @@
             [{
-                "id": "one",
+                "id": "1",
                 "title": "Song1",
                 "artist": "The Local Trains",
                 "url": "songs/song1.mp3",
                 "image":"images/music1.png"
             },
             {
-                "id": "two",
+                "id": "2",
                 "title": "Song2",
                 "artist": "Aastha Gill",
                 "url": "songs/song2.mp3",
                 "image":"images/music2.png"
             },
             {
-                "id": "three",
+                "id": "3",
                 "title": "Song3",
                 "artist": "Hugo",
                 "url": "songs/song3.mp3",

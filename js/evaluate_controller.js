@@ -1,8 +1,9 @@
 app.controller('evaluate_controller',function($http,$location,$scope,mainservice,$rootScope){
 	/*music controller*/
 	$scope.song_list=[];
+	$scope.ratings=[];
 	$scope.redirect_to_player=false;
-	var promise=mainservice.preparePlayer();
+	var promise=mainservice.preparePlayerEvaluate();
 	promise.then(function(res){
 		$scope.song_list=res.data;
 		console.log(res.data);
@@ -32,6 +33,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	//////////////////////////
 	$scope.$watch('redirect_to_player', function(oldval,newval) {
 		if(oldval!=newval){ 
+			mainservice.postRating($scope.ratings);
 			$rootScope.$broadcast('redirecting');
 			$location.url('/player');
 		}
@@ -53,6 +55,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	$scope.rated =  function(){
 		$scope.next=false;
 		$rootScope.$broadcast('rated');
-		var promise = mainservice.postRating(rating);
+		$scope.ratings.push(rating);
+		//var promise = mainservice.postRating(rating);
 	};
 });

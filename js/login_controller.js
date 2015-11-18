@@ -1,4 +1,4 @@
-app.controller('login_controller',function($scope,mainservice){
+app.controller('login_controller',function($scope,mainservice,$location){
 	$scope.inProcess = false;
 	$scope.enable = function(){
 		if($scope.username!="" && $scope.username!= undefined && $scope.pass!="" && $scope.pass != undefined && $scope.inProcess==false)
@@ -13,14 +13,16 @@ app.controller('login_controller',function($scope,mainservice){
 	$scope.process = function(){
 		$scope.inProcess=true;
 		var data = {
-			"username": $scope.username,
+			"email": $scope.username,
 			"password": $scope.pass
 		};
-		 var response = mainservice.login(data);
-		// response.promise.then(function(res){
-			
-		// 		response action
-			
-		//});
+		var response = mainservice.login(data);
+		response.then(function(res){
+			console.log(res.data.id);
+			if(res.data.id==1)
+				$location.path('/evaluate');
+			else
+				$scope.inProcess=false;
+		});
 	};
 });
