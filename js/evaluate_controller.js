@@ -3,10 +3,15 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	$scope.song_list=[];
 	$scope.ratings=[];
 	$scope.redirect_to_player=false;
+	var current_index;
 	var promise=mainservice.preparePlayerEvaluate();
 	promise.then(function(res){
+		angular.forEach(res.data,function(track,index){ 
+			track.sid=track.id;
+			track.id=index+1+"";
+			track.image='images/music'+((index+1)%3+1)+'.png';
+		};
 		$scope.song_list=res.data;
-		console.log(res.data);
 	});
 	$scope.$on('changedIndex',function(obj,data){
 		if(data.mindex==$scope.song_list.length)
@@ -15,16 +20,18 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 		}
 		if(data.type==1)
 		{
+			current_index=data.mindex;
 			$scope.present_image=$scope.song_list[data.mindex].image;
-			$scope.current_track_name = $scope.song_list[data.mindex].title;
+			$scope.current_track_name = $scope.song_list[data.mindex].name;
 			$scope.current_track_artist = $scope.song_list[data.mindex].artist;
 		}
 		else{
 			angular.forEach($scope.song_list, function(elem, key){
 				if(data.mindex==elem.id)
 				{
+					current_index=key;
 					$scope.present_image=$scope.song_list[key].image;
-					$scope.current_track_name = $scope.song_list[key].title;
+					$scope.current_track_name = $scope.song_list[key].name;
 					$scope.current_track_artist = $scope.song_list[key].artist;
 				}
 			});
@@ -55,7 +62,10 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 	$scope.rated =  function(){
 		$scope.next=false;
 		$rootScope.$broadcast('rated');
-		$scope.ratings.push(rating);
+		var tempObject = {"category":$scope.song_list[current_index].category,
+						  "id":$scope.song_list[current_index].sid,
+						  "rating":rating};
+		$scope.ratings.push(tempObject);
 		//var promise = mainservice.postRating(rating);
 	};
 });

@@ -1,4 +1,4 @@
-app.controller('login_controller',function($scope,mainservice,$location){
+app.controller('login_controller',function($scope,mainservice,$location,$mdToast){
 	$scope.inProcess = false;
 	$scope.enable = function(){
 		if($scope.username!="" && $scope.username!= undefined && $scope.pass!="" && $scope.pass != undefined && $scope.inProcess==false)
@@ -21,8 +21,14 @@ app.controller('login_controller',function($scope,mainservice,$location){
 			console.log(res.data.id);
 			if(res.data.id==1)
 				$location.path('/evaluate');
-			else
+			else if(res.data.id==-1){
+				$mdToast.show($mdToast.simple().content('Wrong username or password').position('top right'));
 				$scope.inProcess=false;
+			}
+			else{
+				$mdToast.show($mdToast.simple().content('Wrong username or password').position('top right'));
+				$scope.inProcess=false;
+			}
 		});
 	};
 });

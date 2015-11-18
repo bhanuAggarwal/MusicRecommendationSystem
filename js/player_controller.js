@@ -1,12 +1,28 @@
 app.controller('player_controller',function($scope,$http,mainservice,$rootScope){
 	$scope.song_list=[];
-	var promise=mainservice.preparePlayer();
-	promise.then(function(res){
+	var arr=mainservice.preparePlayerMain();
+	arr[0].then(function(res){
+		angular.forEach(res.data,function(track,index){ 
+			track.sid=track.id;
+			track.id=index+1+"";
+			track.image='images/music'+(parseInt(Math.random()*10)%3+1)+'.png';
+		});
+		$scope.song_list_trending=res.data;
+	});
+	arr[1].then(function(res){
+		$scope.song_list_recommended=res.data;
+		$scope.song_list_current=res.data;
 		$scope.song_list=res.data;
-		$scope.song_list_recommended=$scope.song_list;
-		$scope.song_list_current=$scope.song_list;
-		$scope.song_list_trending=$scope.song_list;
-		console.log($scope.song_list);
+		console.log(res.data);
+		angular.forEach(res.data,function(track,index){ 
+			track.sid=track.id;
+			track.id=index+1+"";
+			track.image='images/music'+(parseInt(Math.random()*10)%3+1)+'.png';
+			soundManager.createSound({
+                id: track.id,
+                url: track.location
+            });
+		});
 	});
 	$scope.$on('changedIndex',function(obj,data){
 		if(data.type==1)

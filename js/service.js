@@ -1,6 +1,6 @@
 app.service('mainservice',function($http,$q,$rootScope){
 	var playlist;
-	var route='http://localhost:8080/myMusic-services';
+	var route='http://192.168.0.104:8080/myMusic-services';
 	this.send = function(dat){
 		// $http.post('localhost:8080',dat,{'Content-Type':'application/json'});
 		$http.post(route+'/song/upload',dat,{'Content-Type':'application/json'}).then(function(){
@@ -18,7 +18,6 @@ app.service('mainservice',function($http,$q,$rootScope){
 			   url: route+'/user'
 			}).then(function(res){
 			pr.resolve(res);
-			console.log(res);
 		},function(res){
 			console.log('error');
 		});
@@ -26,9 +25,7 @@ app.service('mainservice',function($http,$q,$rootScope){
 	};
 	this.postRating = function(data){
 		var pr=$q.defer();
-		console.log(data);
-		pr.promise=null;
-		$http.post(route+'/login',data,{'Content-Type':'application/json'}).then(function(res){
+		$http.post(route+'/user/1/taste',data,{'Content-Type':'application/json'}).then(function(res){
 			pr.resolve(res);
 		},function(res){
 			pr.resolve(res);
@@ -37,35 +34,40 @@ app.service('mainservice',function($http,$q,$rootScope){
 	};
 	this.preparePlayerEvaluate = function(data){
 		var pr=$q.defer();
-		$http.post(route+'/login',data).then(function(res){
-			angular.forEach(res.data,function(track){ 
-				playlist=res.data;
+		$http.get(route+'/song/sample',data).then(function(res){
+			angular.forEach(res.data,function(track,index){ 
+				track.sid=track.id;
+				track.id=index+1+"";
+				track.image='images/music'+((index+1)%3+1)+'.png';
 				soundManager.createSound({
 	                id: track.id,
-	                url: track.url
+	                url: track.location
 	            });
+			});
 			pr.resolve(res);
-		});
 		},function(){
 			console.log("fail");
 		});
 		return pr.promise;
 	};
-	this.preparePlayer = function(){
-		var pr=$q.defer();
-		$http.get('song-list.json').then(function(res){
-			angular.forEach(res.data,function(track){ 
-				playlist=res.data;
-				soundManager.createSound({
-	                id: track.id,
-	                url: track.url
-	            });
-			pr.resolve(res);
+	this.preparePlayerMain = function(){
+		var arr=[];
+		var user_id={
+			"userId":1
+		};
+		var trending_pr=$q.defer();
+		var playing_pr=$q.defer();
+		$http.get(route+'/song/popular',{'Content-Type':'application/json'}).then(function(res){
+			trending_pr.resolve(res);
+		},function(res){
 		});
-		},function(){
-			console.log("fail");
+		$http.get(route+'/song/recommendedForUser?userId=1',{'Content-Type':'application/json'}).then(function(res){
+			playing_pr.resolve(res);
+		},function(res){
 		});
-		return pr.promise;
+		arr.push(trending_pr.promise);
+		arr.push(playing_pr.promise);
+		return arr;
 	};
 	this.getPlaylist = function(){
 		return playlist;
