@@ -53,6 +53,14 @@ md-divider{
 	-webkit-transition:1s all;
 	transition:1s all;
 }
+.animate-button{
+	animation:key 2s forwards;
+
+}
+@keyframes key{
+	from {transform:scale(0.6);opacity: 0;}
+	to {transform:scale(1.5);opacity: 1;}
+}
 .anime-show.ng-hide{
 	width:50% !important;
 	opacity: 0;
@@ -70,7 +78,7 @@ md-divider{
     cursor: pointer;
 }
 .starfill{
-	color: #fd0;
+	color: #fcc100;
 }
 .init{
 	color:#616161;

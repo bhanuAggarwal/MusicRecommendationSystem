@@ -10,7 +10,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 			track.sid=track.id;
 			track.id=index+1+"";
 			track.image='images/music'+((index+1)%3+1)+'.png';
-		};
+		});
 		$scope.song_list=res.data;
 	});
 	$scope.$on('changedIndex',function(obj,data){

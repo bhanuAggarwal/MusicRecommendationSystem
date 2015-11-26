@@ -3,7 +3,7 @@ return {
 restrict : 'A',
 template :  '<div class="rating full-width padding-0 margin-0" layout="row" layout-align="space-around center">'+ 
             '<span ng-repeat="star in stars" class="star" ng-class="{starfill: star.filled, init: active==false }" ng-click="toggle($index)">' +
-            '<i class="fa fa-star">a</i>' +
+            '<i class="fa fa-star"></i>' +
             ' </span>' +
             '</div>',
 scope : {

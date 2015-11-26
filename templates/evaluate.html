@@ -1,62 +1,63 @@
-<md-grid-list class="bgcolor" md-cols="20" md-row-height="2:1" md-cols-md="20" md-row-height-md="2:1" md-cols-sm="20" md-row-height-sm="1:3">
-	<md-grid-tile class="bgcolor" md-colspan="20" md-rowspan="2" md-colspan-md="20" md-rowspan-md="1" 
+<md-grid-list class="gradient-1" md-cols="20" md-row-height="2:1" md-cols-md="20" md-row-height-md="2:1" md-cols-sm="20" md-row-height-sm="1:3">
+	<md-grid-tile class="background-transparent" md-colspan="20" md-rowspan="2" md-colspan-md="20" md-rowspan-md="1" 
 	md-colspan-sm="20" md-rowspan-sm="1">
 	</md-grid-tile>
-	<md-grid-tile class="bgcolor" md-colspan="4" md-rowspan="15" md-colspan-md="1" md-rowspan-md="1" md-colspan-sm="1" 
+	<md-grid-tile class="background-transparent" md-colspan="4" md-rowspan="15" md-colspan-md="1" md-rowspan-md="1" md-colspan-sm="1" 
 	md-rowspan-sm="1">
 	</md-grid-tile>
 	<!-- main -->
-	<md-grid-tile class="white-background" md-colspan="12" md-rowspan="14" md-colspan-md="18" md-rowspan-md="20" 
+	<md-grid-tile class="background-transparent" md-colspan="12" md-rowspan="14" md-colspan-md="18" md-rowspan-md="20" 
 	md-colspan-sm="18" md-rowspan-sm="12" layout="column" layout-align="start start">
-		<div class="full-dimension" layout="column" layout-align="start center">
-			<md-toolbar class="md-small md-warn md-whiteframe-z2"></md-toolbar>
+		<div class="full-dimension" layout="row" ng-show="!track_played" layout-align="center center" ng-show="!track_played" ng-click="track_played=true">
+			<div class="full-width" flex="80" layout="column" layout-align="space-between center">
+				<span class="color-white full-width abel spacing-2" style="padding:50px;font-size: 1.2em;text-align: center;">Please rate next few songs so that we could get hang of your ambience and optimize your lyrical experience</span>
+				<md-button class="grey-bg width-60 md-raised animate-button margin-top-10" style="background: #424242" play-pause-toggle>
+					<span class="abel weight-400 text-padding color-white" style="font-size: 1.2em;">Lets Begin!!</span>
+				</md-button>
+			</div>
+		</div>
+		<div class="full-dimension" ng-show="track_played" layout="column" layout-align="start center">
 			<!-- NON-MOBILE_UI hide-sm -->
 			<!-- ////////////////////////////////////////////////////////////// -->
-			<div class="full-dimension fix-height-div md-whiteframe-z2" layout="row" 
+			<div class="full-dimension fix-height-div" layout="row" 
 			layout-sm="column" layout-align-sm="start start" layout-align="space-around" hide-sm>
 				<!-- main interface -->
 				<sound-manager></sound-manager>
 				<!-- caching -->
 				<i class="fa fa-star" style="display: none;"></i>
 				<!-- ////////// -->
-				<md-whiteframe flex class="full-height white-background" layout="column" layout-align="start center" layout-padding flex-sm="100">
+				<md-whiteframe flex class="full-height background-transparent border" layout="column" layout-align="start center" layout-padding flex-sm="100">
 					<!-- fotu -->
 					<div class="width-90 margin-top-10" flex="45" 
 					style="background-image: url({{present_image}});background-size:cover;"></div>
 					
 					<!-- details -->
-					<div class="width-90 md-whiteframe-z2" flex="15" style="background:#ff5722;" layout-padding>
-						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
-						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
+					<div class="width-90" flex="15" layout-padding>
+						<div class="md-title robotos weight-400 color-white spacing-1">{{current_track_name}}</div>
+						<div class="md-subhead abel weight-400 color-white spacing-1">{{current_track_artist}}</div>
 					</div>
 					<!-- controls -->
 					<div class="width-90 padding-top-20" flex="30" layout="column" 
 					layout-align="space-around center" flex-sm>
 						<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding style="cursor:pointer;"></md-progress-linear>
 						<div layout="row" layout-align="center center" ng-show="track_played">
-							<md-button class="md-fab md-primary md-mini" mute-music>
+							<md-button class="md-fab grey-bg button-border md-mini" mute-music>
 								<md-icon class="scale-8" md-svg-src="images/mute.svg"></md-icon>
 							</md-button>
-							<md-button class="md-fab md-warn" play-pause-toggle>
+							<md-button class="md-fab grey-bg button-border" play-pause-toggle>
 								<md-icon md-svg-src="images/play.svg" ng-show="!isPlaying"></md-icon>
 								<md-icon md-svg-src="images/pause.svg" ng-show="isPlaying"></md-icon>
 							</md-button>
-							<md-button class="md-fab md-primary md-mini" repeat-music>
+							<md-button class="md-fab grey-bg button-border md-mini" repeat-music>
 								<md-icon class="scale-8" md-svg-src="images/repeat.svg"></md-icon>
-							</md-button>
-						</div>
-						<div class="full-width" layout="row" layout-align="center center" ng-show="!track_played" ng-click="track_played=true">
-							<md-button class="md-primary md-raised" play-pause-toggle flex="50" 
-							flex-sm="100">
-								<span class="abel weight-400 text-padding" style="font-size: 1.1em;">Lets Begin!!</span>
 							</md-button>
 						</div>
 					</div>
 				</md-whiteframe>
 				<!-- list -->
-				<md-whiteframe flex="35" flex-sm="100" class="left-shadow full-height" 
+				<md-whiteframe flex="35" flex-sm="100" class="full-height border" 
 				style="overflow-y:auto;overflow-x:hidden;">
-					<div class="full-dimension grey-bg md-whiteframe-z3" layout="column" 
+					<div class="full-dimension background-transparent md-whiteframe-z3" layout="column" 
 					layout-align="start start" layout-padding >
 						<div class="full-width" layout="column" layout-align="start start" flex="70" ng-show="track_played">
 							<span class="color-white robotos weight-500 text-padding" 
@@ -68,9 +69,9 @@
 							<div class="star-rating full-width" star-rating rating-value="1"
 							data-max="5" on-rating-selected="selected(rating)" ng-show="track_played">
 							</div>
-							<md-button class="md-raised md-warn full-width padding-0 margin-0 
+							<md-button class="md-raised button-border grey-bg full-width padding-0 margin-0 
 							anime-show" ng-show="next" ng-click="rated()" next-track>
-								Next Song
+								<span class="color-white abel weight-500 spacing-1" style="font-size: 1.2em">Next Song</span>
 							</md-button>
 						</div>
 					</div>
@@ -78,7 +79,7 @@
 			</div>
 			<!-- mobile UI -->
 			<!-- ///////////////////////////////////////////////////////////-->
-			<div class="full-dimension md-whiteframe-z2" layout-sm="column" 
+			<div class="full-dimension" layout-sm="column" 
 			layout-align-sm="start start" hide-gt-sm>
 				<md-whiteframe class="full-width white-background" layout-sm="column" layout-align-sm="start center" 
 				flex-sm="70" layout-padding>
@@ -86,7 +87,7 @@
 					<div class="full-dimension padding-top-10 full-width" flex-sm
 					style="background-image: url({{present_image}});background-size:cover;" flex-sm></div>
 					<!-- details -->
-					<div class="full-width md-whiteframe-z2" style="background:#ff5722;" layout="column" layout-align="space-around start" flex-sm="10" layout-padding>
+					<div class="full-width" style="background:#ff5722;" layout="column" layout-align="space-around start" flex-sm="10" layout-padding>
 						<div class="md-title robotos weight-400 color-white">{{current_track_name}}</div>
 						<div class="md-subhead abel weight-400 color-white">{{current_track_artist}}</div>
 					</div>
@@ -140,6 +141,6 @@
 		</div>
 	</md-grid-tile>
 	<!-- //////////////////////////////////////////////////////// -->
-	<md-grid-tile md-colspan="4" md-rowspan="15" hide-sm>
+	<md-grid-tile class="background-transparent" md-colspan="4" md-rowspan="17" hide-sm>
 	</md-grid-tile>
 </md-grid-list>

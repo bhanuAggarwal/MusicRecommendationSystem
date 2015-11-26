@@ -1,56 +1,60 @@
 <div class="full-width ng-full-height hide-overflow">
 	<div class="full-dimension" layout="column" layout-align="start start">
-		<div class="full-dimension" flex="90" layout="column" layout-align="space-around start">
-			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
-			layout-align="start center"layout-padding>
+		<div class="full-dimension gradient-1" flex="90" layout="column" layout-align="space-around start">
+			<div class="width-99 background-transparent hide-overflow-x" flex="30" layout="column" 
+			layout-align="start center" layout-padding>
 				<div class="full-width">
-					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Trending</span>
-					<md-divider class="full-width" layout-padding></md-divider>
+					<span class="full-width text-light-white abel weight-500" style="font-size: 1.2em;">Trending</span>
+					<md-divider class="full-width bg-white" layout-padding></md-divider>
 				</div>
-				<div class="full-width" layout="row" layout-align="start center">
-					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_trending" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+				<div class="full-width full-height" layout="row" layout-align="start center">
+					<div class="margin-left-right-7 pointer pop-up" style="height:100;" flex="10" ng-repeat="song in song_list_trending" layout="column" layout-align="space-around start" ng-click="playSong(song);">
 						<div class="full-dimension" 
-						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
-						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
-							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
+						style="background-image: url({{song.image}});background-size:cover;" flex="70">
+						</div>
+						<div class="grey-bg full-width hide-overflow-x padding-2" flex="45" layout="row" layout-align="center start">
+							<span class="text-light-white abel spacing-1 weight-00 text-center" style="font-size: 0.92em;">{{song.name}}</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
+			<div class="width-99 background-transparent hide-overflow-x" flex="30" layout="column" 
 			layout-align="start start" layout-padding>
 				<div class="full-width">
-					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Recommended</span>
-					<md-divider class="full-width" layout-padding></md-divider>
+					<span class="full-width text-light-white abel weight-500" style="font-size: 1.2em;">Recommended</span>
+					<md-divider class="full-width bg-white" layout-padding></md-divider>
 				</div>
 				<div class="full-width" layout="row" layout-align="start center">
-					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_recommended" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+					<div class="margin-left-right-7 pointer pop-up" style="height:100;" flex="10" 
+					ng-repeat="song in song_list_recommended" layout="column" layout-align="space-around start" ng-click="playSong(song);">
 						<div class="full-dimension" 
-						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
-						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
-							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
+						style="background-image: url({{song.image}});background-size:cover;" flex="70">
+						</div>
+						<div class="grey-bg full-width hide-overflow-x padding-2" flex="45" layout="row" layout-align="center start">
+							<span class="text-light-white abel spacing-1 weight-00 text-center" style="font-size: 0.92em;">{{song.name}}</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="width-99 md-whiteframe-z1 white-background" flex="30" layout="column" 
+			<div class="width-99 background-transparent hide-overflow-x" flex="30" layout="column" 
 			layout-align="start start"layout-padding>
 				<div class="full-width">
-					<span class="full-width text-grey abel weight-500" style="font-size: 1.2em;">Current Playlist</span>
-					<md-divider class="full-width" layout-padding></md-divider>
+					<span class="full-width text-light-white abel weight-500" style="font-size: 1.2em;">Current Playlist</span>
+					<md-divider class="full-width bg-white" layout-padding></md-divider>
 				</div>
 				<div class="full-width" layout="row" layout-align="start center">
-					<div class="md-whiteframe-z2 margin-left-right-5 pointer" style="height:100;" flex="10" ng-repeat="song in song_list_current" layout="column" layout-align="space-around start" ng-click="playSong(song);">
+					<div class="margin-left-right-7 pointer pop-up" style="height:100;" flex="10" ng-repeat="song in song_list_current" layout="column" layout-align="space-around start" ng-click="playSong(song);">
 						<div class="full-dimension" 
-						style="background-image: url({{song.image}});background-size:cover;" flex="70"></div>
-						<div class="grey-bg full-width border-grey-1" flex="35" layout-padding>
-							<span class="text-white spacing-1 weight-500">{{song.title}}</span>
+						style="background-image: url({{song.image}});background-size:cover;" flex="70">
+						</div>
+						<div class="grey-bg full-width hide-overflow-x padding-2" flex="45" layout="row" layout-align="center start">
+							<span class="text-light-white abel spacing-1 weight-00 text-center" style="font-size: 0.92em;">{{song.name}}</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="full-dimension md-whiteframe-z3 grey-bg" flex="10" layout="row" 
+		<div class="full-dimension md-whiteframe-z5 color-blue border-top" flex="10" layout="row" 
 		layout-align="start center" layout-padding>
 			<sound-manager></sound-manager>
 			<div class="full-height" flex="15" layout="row" layout-align="center center">
@@ -62,14 +66,14 @@
 					<md-icon class="scale-13" md-svg-src="images/next.svg"></md-icon>
 				</md-button>
 			</div>
-			<div class="full-height border-left-right" flex="40" layout="row" layout-align="start center" layout-padding>
+			<div class="full-height border-left-right" flex="40" layout="row" layout-align="start center" la>
 				<md-progress-linear md-mode="determinate" ng-value="progress" seek-track layout-padding 
 				style="cursor:pointer;height:10px !important;"></md-progress-linear>
 			</div>
 			<div layout="column" layout-align="start start" layout-padding>
-				<span class="color-white robotos weight-600 text-padding" 
+				<span class="text-light-white robotos weight-600 text-padding" 
 				style="font-size:1.1em;">{{current_track_name}}</span>
-				<span class="color-white Abel weight-300 text-padding" style="font-size: 1em">{{current_track_artist}}</span>
+				<span class="text-light-white Abel weight-300 text-padding" style="font-size: 1em">{{current_track_artist}}</span>
 			</div>
 		</div>
 	</div>

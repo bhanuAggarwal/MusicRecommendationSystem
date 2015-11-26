@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body ng-app="app" ng-controller="controls">
-	<md-toolbar class="md-primary md-whiteframe-z2" layout="row" flex="100" 
+	<md-toolbar class="color-blue md-whiteframe-z2" layout="row" flex="100" 
 	layout-align="space-between center">
 		<md-whiteframe class="md-headline" layout-padding layout-margin>
 			<span id="player-button" ng-click="redirectPlayer()">MyMusic</span>
@@ -16,12 +16,12 @@
 			<md-input-container class="margin-0 padding-0 animate-search width-90" ng-show="showSearch">
 				<input type="text" class="abel" style="color:white;" ng-model="searchText"/>
 			</md-input-container>
-			<md-button class="md-fab md-mini md-primary" ng-click="searchToggle()">
+			<md-button class="md-fab md-mini background-transparent" ng-click="searchToggle()">
 				<md-icon md-svg-src="images/search.svg"></md-icon>
 			</md-button>
 		</div>
 	</md-toolbar>
-	<ng-view class="full-dimension"></ng-view>
+	<ng-view class="full-dimension" style="overflow: hidden;"></ng-view>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
 	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
