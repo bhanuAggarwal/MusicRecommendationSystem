@@ -61,9 +61,10 @@
 					layout-align="start start" layout-padding >
 						<div class="full-width" layout="column" layout-align="start start" flex="70" ng-show="track_played">
 							<span class="color-white robotos weight-500 text-padding" 
-							style="font-size:1.3em;">{{current_track_name}}</span>
+							style="font-size:1.4em;">{{current_track_name}}</span>
 							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">{{current_track_artist}}</span>
-							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">Genre</span>
+							<span class="color-white Abel weight-400 text-padding" style="font-size: 1.2em">{{current_track_category}}
+							</span>
 						</div>
 						<div class="full-width" flex layout="column" layout-align="space-between start">
 							<div class="star-rating full-width" star-rating rating-value="1"

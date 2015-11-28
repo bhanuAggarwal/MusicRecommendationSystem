@@ -1,6 +1,6 @@
 app.service('mainservice',function($http,$q,$rootScope){
 	var playlist;
-	var route='http://192.168.0.104:8080/myMusic-services';
+	var route='http://localhost:8080/myMusic-services';
 	this.send = function(dat){
 		// $http.post('localhost:8080',dat,{'Content-Type':'application/json'});
 		$http.post(route+'/song/upload',dat,{'Content-Type':'application/json'}).then(function(){
@@ -52,7 +52,7 @@ app.service('mainservice',function($http,$q,$rootScope){
 			angular.forEach(res.data,function(track,index){ 
 				track.sid=track.id;
 				track.id=index+1+"";
-				track.image='images/music'+((index+1)%3+1)+'.png';
+				track.image='images/listTemp10'+((index+1)%18+1)+'.jpeg';
 				soundManager.createSound({
 	                id: track.id,
 	                url: track.location
@@ -93,18 +93,19 @@ app.service('mainservice',function($http,$q,$rootScope){
 	this.getPlaylist = function(){
 		return playlist;
 	};
-	this.playTrack = function(song_data,progress){
-		$rootScope.$broadcast('playSong',song_data);
+	this.playTrack = function(song_data,progress,current_sid){
+		//$rootScope.$broadcast('playSong',song_data);
+		console.log(current_sid);
 		var promise=$q.defer();
 		var obj={
 			"userId":1,
-			"session":song_data.sid,
+			"session":current_sid,
 			"rating":progress?progress:0
 		};
 		$http.post(route+'/user/session',obj,{'Content-Type':'application/json'}).then(function(res){
 			if(res.data.id==1)
 			{
-				$http.get(route+'/song/nextRecommended?userId=1',{'Content-Type':'application/json'}).then(function(res){
+				$http.get(route+'/song/nextRecommended?userId=1&songId='+song_data.sid,{'Content-Type':'application/json'}).then(function(res){
 					promise.resolve(res);
 				},function(res){
 				});

@@ -9,7 +9,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 		angular.forEach(res.data,function(track,index){ 
 			track.sid=track.id;
 			track.id=index+1+"";
-			track.image='images/music'+((index+1)%3+1)+'.png';
+			track.image='images/'+((index+1)%8+1)+'.jpeg';
 		});
 		$scope.song_list=res.data;
 	});
@@ -20,9 +20,11 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 		}
 		if(data.type==1)
 		{
+			console.log($scope.song_list);
 			current_index=data.mindex;
 			$scope.present_image=$scope.song_list[data.mindex].image;
 			$scope.current_track_name = $scope.song_list[data.mindex].name;
+			$scope.current_track_category = $scope.song_list[data.mindex].category;
 			$scope.current_track_artist = $scope.song_list[data.mindex].artist;
 		}
 		else{
@@ -32,6 +34,7 @@ app.controller('evaluate_controller',function($http,$location,$scope,mainservice
 					current_index=key;
 					$scope.present_image=$scope.song_list[key].image;
 					$scope.current_track_name = $scope.song_list[key].name;
+					$scope.current_track_category = $scope.song_list[key].category;
 					$scope.current_track_artist = $scope.song_list[key].artist;
 				}
 			});

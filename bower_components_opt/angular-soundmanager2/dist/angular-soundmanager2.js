@@ -74,7 +74,7 @@
         };
         this.defaultOptions = {
             /**
-             * the default configuration for sound objects made with createSound() and related methods
+             * the default configuration for sound objects made with () and related methods
              * eg., volume, auto-load behaviour and so forth
              */
             'autoLoad': false, // enable automatic loading (otherwise .load() will be called on demand with .play(), the latter being nicer on bandwidth - if you want to .load yourself, you also can)
@@ -340,6 +340,12 @@
          * @param {object} oOptions Sound options (at minimum, id and url parameters are required.)
          * @return {object} SMSound The new SMSound object.
          */
+        this.clearPlaylist = function(){
+            angularPlayer.stop();
+            angularPlayer.setCurrentTrack(null);
+            angularPlayer.clearPlaylist(function(data) {
+            });
+        };
         this.createSound = function(oOptions, _url) {
             var cs, cs_string, options, oSound = null;
             // <d>
@@ -4767,9 +4773,14 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
             },
             clearPlaylist: function(callback) {
                 $log.debug('clear playlist');
+                console.log(soundManager.soundIDs);
                 this.resetProgress();
                 //unload and destroy soundmanager sounds
                 var smIdsLength = soundManager.soundIDs.length;
+                // for(var i=0;i<smIdsLength;i++)
+                // {
+                //     soundManager.destroySound(soundManager.soundIDs[0]);
+                // }
                 this.asyncLoop({
                     length: smIdsLength,
                     functionToLoop: function(loop, i) {
@@ -4778,7 +4789,7 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
                             soundManager.destroySound(soundManager.soundIDs[0]);
                             //custom code
                             loop();
-                        }, 100);
+                        }, 50);
                     },
                     callback: function() {
                         //callback custom code
@@ -4802,8 +4813,8 @@ ngSoundManager.factory('angularPlayer', ['$rootScope', '$log',
 ]);
 
 
-ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer', '$rootScope', 
-    function($filter, angularPlayer,$rootScope) {
+ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer', '$rootScope', '$timeout',
+    function($filter, angularPlayer,$rootScope,$timeout) {
         return {
             restrict: "E",
             link: function(scope, element, attrs) {
@@ -4813,13 +4824,41 @@ ngSoundManager.directive('soundManager', ['$filter', 'angularPlayer', '$rootScop
                     angularPlayer.pause();
                     angularPlayer.setCurrentTrack(null);
                 });
+                var s_data;
+                scope.$on('clear_playlist',function(event,data){
+                    s_data=data;
+                    $timeout(function(){
+                        angularPlayer.setCurrentTrack(null);
+                        angularPlayer.clearPlaylist(function(data) {
+                            angular.forEach(s_data,function(track,index){ 
+                            track.sid=track.id;
+                            track.id=index+1+"";                            
+                            track.image='images/'+(parseInt(Math.random()*10)%3+1)+'.jpeg';
+                            soundManager.createSound({
+                                id: track.id,
+                                url: track.location
+                            });
+                            });
+                            angularPlayer.setCurrentTrack(null);
+                            angularPlayer.play();
+                            scope.isPlaying=true;
+                            $rootScope.$broadcast('music:isPlaying', true);
+                        });
+                    },0);
+                });
                 scope.$on('playSong',function(event,data){
-                    angularPlayer.playTrack(data.id);
-                    scope.isPlaying=true;
+                    $timeout(function(){
+                        angularPlayer.setCurrentTrack(null);
+                        angularPlayer.play();
+                        scope.isPlaying=true;
+                        $rootScope.$broadcast('music:isPlaying', true);
+                    },0);
+                    // angularPlayer.setCurrentTrack(null);
+                    // angularPlayer.play();
+                    // scope.isPlaying=true;
                     // angularPlayer.clearPlaylist();
                     // $rootScope.$broadcast('music:isPlaying', true);
                 });
-
                 scope.$on('track:progress', function(event, data) {
                     scope.$apply(function(){
                         scope.progress = data;
